@@ -89,13 +89,21 @@ export default class ClassesController {
 
       await trx('class_schedules').insert(classSchedule);
       await trx.commit();
-      return res.status(201).send();
+      return res.status(201).json({
+        message: {
+          title: 'Aula criada com Sucesso',
+          content: 'Logo mais você terá grandes alunos'
+        }
+      });
 
     } catch (error) {
 
       await trx.rollback();
       return res.status(500).json({
-        error: 'Unexpected error while creating new class',
+        message: {
+          title: 'Falha ao cadastrar nova Aula',
+          content: 'Erro inesperado ao criar nova Aula, tente novamente.',
+        }
       });
 
     }
